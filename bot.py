@@ -119,7 +119,7 @@ async def itl(ctx, line, trans =""):
     print(ar)
     cur.execute("INSERT INTO inter VALUES (%s,%s,%s) ON CONFLICT (QUOT) DO NOTHING ;",(ar,line,trans))
     conn.commit()
-    cur.execute("SELECT NUM, QUOT, TRAN from quotes")
+    cur.execute("SELECT NUM, QUOT, TRAN from inter")
     rows = cur.fetchall()
     for j in rows:
         print(j)
