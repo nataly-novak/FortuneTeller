@@ -54,7 +54,6 @@ async def cook(ctx):
     r = str(cur.fetchone())
     rr = int(r[1:-2])
     print(rr)
-    print(len(f1))
     cur.execute("SELECT QUOT FROM quotes WHERE NUM = %s",([random.randrange(rr+1)]))
     resp = str(cur.fetchone())
     response = resp[2:-3].strip()
