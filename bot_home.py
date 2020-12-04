@@ -9,8 +9,12 @@ import psycopg2
 
 DATABASE_URL = os.environ['DATABASE_URL']
 
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-
+#conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+conn = psycopg2.connect(
+    host="localhost",
+    database="mylocaldb",
+    user="study",
+    password="1")
 
 cur = conn.cursor()
 #cur.execute("DROP TABLE quotes")
