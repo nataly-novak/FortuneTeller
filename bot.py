@@ -13,7 +13,7 @@ conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 
 cur = conn.cursor()
-#cur.execute("DROP TABLE quotes")
+cur.execute("DROP TABLE inter")
 cur.execute("select exists(select * from information_schema.tables where table_name=%s)", ('quotes',))
 check = (cur.fetchone()[0])
 print(check)
