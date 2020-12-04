@@ -34,7 +34,7 @@ print(check)
 if not check:
     cur.execute('''CREATE TABLE inter (
     NUM INT  NOT NULL,
-    QUOT CHAR(200)  NOT NULL
+    QUOT CHAR(200)  NOT NULL,
     TRAN CHAR(200)
     );''')
     print("Table created successfully")
