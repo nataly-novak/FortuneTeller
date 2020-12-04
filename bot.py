@@ -27,6 +27,22 @@ if not check:
 else:
     print('No need')
 conn.commit()
+
+cur.execute("select exists(select * from information_schema.tables where table_name=%s)", ('inter',))
+check = (cur.fetchone()[0])
+print(check)
+if not check:
+    cur.execute('''CREATE TABLE inter (
+    NUM INT  NOT NULL,
+    QUOT CHAR(200)  NOT NULL
+    QUOT TRAN(200)
+    );''')
+    print("Table created successfully")
+    cur.execute("ALTER TABLE inter ADD CONSTRAINT test_pkey PRIMARY KEY (QUOT);")
+else:
+    print('No need')
+conn.commit()
+
 load_dotenv()
 f = open("quotes.txt", "r")
 f1 = f.readlines()
@@ -59,8 +75,23 @@ async def cook(ctx):
     response = resp[2:-3].strip()
     print(response)
     await ctx.send(response)
+@bot.command(name='q', help = "generates random quotes with translation")
+async def cook(ctx):
+    cur.execute("SELECT MAX(NUM) FROM inter;")
+    r = str(cur.fetchone())
+    rr = int(r[1:-2])
+    print(rr)
+    dd = random.randrange(rr+1)
+    cur.execute("SELECT QUOT, FROM inter WHERE NUM = %s",(dd))
+    resp = str(cur.fetchone())
+    response = resp[2:-3].strip()
+    cur.execute("SELECT QUOT, FROM inter WHERE NUM = %s", (dd))
+    resp1 = str(cur.fetchone())
+    response = response+' - ' +resp1[2:-3].strip()
+    print(response)
+    await ctx.send(response)
 
-@bot.command(name='w' , help='Adds a quote. Use quotes around')
+@bot.command(name='w' , help='Adds a quote. Use quotes around it to enter')
 async def writ(ctx, line):
     cur.execute("SELECT MAX(NUM) FROM quotes;")
     a = str(cur.fetchone())
@@ -69,6 +100,19 @@ async def writ(ctx, line):
     cur.execute("INSERT INTO quotes VALUES (%s,%s) ON CONFLICT (QUOT) DO NOTHING ;",(ar,line))
     conn.commit()
     cur.execute("SELECT NUM, QUOT from quotes")
+    rows = cur.fetchall()
+    for j in rows:
+        print(j)
+
+@bot.command(name='a' , help='Adds a quote. Use quotes around both quote and translation')
+async def itl(ctx, line, trans =""):
+    cur.execute("SELECT MAX(NUM) FROM inter;")
+    a = str(cur.fetchone())
+    ar = int(a[1:-2])+1
+    print(ar)
+    cur.execute("INSERT INTO inter VALUES (%s,%s,%s) ON CONFLICT (QUOT) DO NOTHING ;",(ar,line,trans))
+    conn.commit()
+    cur.execute("SELECT NUM, QUOT, TRAN from quotes")
     rows = cur.fetchall()
     for j in rows:
         print(j)
