@@ -112,7 +112,7 @@ async def itl(ctx, line, trans =""):
     cur.execute("SELECT MAX(NUM) FROM inter;")
     a = str(cur.fetchone())
     print(a)
-    if a == 'None':
+    if a == '(None,)':
         ar = 1
     else:
         ar = int(a[1:-2]) + 1
