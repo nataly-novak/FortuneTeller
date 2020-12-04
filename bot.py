@@ -95,7 +95,10 @@ async def cook(ctx):
 async def writ(ctx, line):
     cur.execute("SELECT MAX(NUM) FROM quotes;")
     a = str(cur.fetchone())
-    ar = int(a[1:-2])+1
+    if a == 'None':
+        ar = 1
+    else:
+        ar = int(a[1:-2])+1
     print(ar)
     cur.execute("INSERT INTO quotes VALUES (%s,%s) ON CONFLICT (QUOT) DO NOTHING ;",(ar,line))
     conn.commit()
