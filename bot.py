@@ -111,7 +111,11 @@ async def writ(ctx, line):
 async def itl(ctx, line, trans =""):
     cur.execute("SELECT MAX(NUM) FROM inter;")
     a = str(cur.fetchone())
-    ar = int(a[1:-2])+1
+    print(a)
+    if a == 'None':
+        ar = 1
+    else:
+        ar = int(a[1:-2]) + 1
     print(ar)
     cur.execute("INSERT INTO inter VALUES (%s,%s,%s) ON CONFLICT (QUOT) DO NOTHING ;",(ar,line,trans))
     conn.commit()
