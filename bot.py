@@ -38,7 +38,7 @@ if not check:
     TRAN CHAR(200)
     );''')
     print("Table created successfully")
-    cur.execute("ALTER TABLE inter ADD CONSTRAINT test_pkey PRIMARY KEY (QUOT);")
+    cur.execute("ALTER TABLE inter ADD CONSTRAINT test_pkey1 PRIMARY KEY (QUOT);")
 else:
     print('No need')
 conn.commit()
