@@ -76,7 +76,7 @@ async def cook(ctx):
     print(response)
     await ctx.send(response)
 @bot.command(name='q', help = "generates random quotes with translation")
-async def cook(ctx):
+async def cookin(ctx):
     cur.execute("SELECT MAX(NUM) FROM inter;")
     r = str(cur.fetchone())
     rr = int(r[1:-2])
@@ -113,7 +113,7 @@ async def itl(ctx, line, trans =""):
     a = str(cur.fetchone())
     print(a)
     if a == '(None,)':
-        ar = 1
+        ar = 0
     else:
         ar = int(a[1:-2]) + 1
     print(ar)
