@@ -35,7 +35,7 @@ if not check:
     cur.execute('''CREATE TABLE inter (
     NUM INT  NOT NULL,
     QUOT CHAR(200)  NOT NULL
-    QUOT TRAN(200)
+    TRAN CHAR(200)
     );''')
     print("Table created successfully")
     cur.execute("ALTER TABLE inter ADD CONSTRAINT test_pkey PRIMARY KEY (QUOT);")
