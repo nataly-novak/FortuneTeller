@@ -143,7 +143,7 @@ async def tarot(ctx, variant):
         for u in res:
             s2 = (u[0] + ' - ' + u[1] + ': ' + u[2])
             await ctx.send(s2)
-    elif variant == '3c':
+    elif variant == '3k':
         a = threeCards()
         res = []
         first = []
