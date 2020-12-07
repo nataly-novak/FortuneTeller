@@ -49,7 +49,7 @@ def printCard(j):
     for k in range(len(deck)):
         if deck[k][0] == j[0]:
             card.append(deck[k][1])
-            if j[1] == '0':
+            if j[1] == 0:
                 card.append('Normal')
             else:
                 card.append('Reversed')
