@@ -1,5 +1,6 @@
 import os
 import random
+from tarot import threeMajors, getMajors, getCards, printCard
 
 from discord.ext import commands
 from dotenv import load_dotenv
@@ -123,5 +124,23 @@ async def itl(ctx, line, trans =""):
     rows = cur.fetchall()
     for j in rows:
         print(j)
+
+@bot.command(name='tarot' , help='')
+async def tarot(ctx, variant):
+    if variant == '3m':
+        a = threeMajors()
+        res =[]
+        first =[]
+        for q in a:
+            x = printCard(q)
+            first.append(x[0])
+            res.append(x)
+        s1 =(first[0]+', '+first[1]+', '+first[2])
+        await ctx.send(s1)
+        for u in res:
+            s2 = (u[0]+' - '+u[1]+': '+u[2])
+            await ctx.send(s2)
+
+
 
 bot.run(TOKEN)
