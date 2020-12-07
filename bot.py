@@ -89,6 +89,7 @@ async def tarot(ctx, variant):
         await ctx.send(s1)
         for u in res:
             s2 = (u[0]+' - '+u[1]+': '+u[2])
+            await ctx.send(s2)
 
 
 
