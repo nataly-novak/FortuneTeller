@@ -48,7 +48,7 @@ def threeCards():
     for i in range(3):
         x =[]
         #draw.append[(majors.pop(random.randrange(len(majors)))), random.randrange(1)]
-        x.append(full.pop(random.randrange(len(majors))))
+        x.append(full.pop(random.randrange(len(full))))
         x.append(random.randrange(2))
         draw.append(x)
     return draw
