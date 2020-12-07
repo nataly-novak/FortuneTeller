@@ -79,8 +79,17 @@ async def writ(ctx, line):
 async def tarot(ctx, variant):
     if variant == '3m':
         a = threeMajors()
+        res =[]
+        first =[]
         for q in a:
-            await ctx.send(printCard(q))
+            x = printCard(q)
+            first.append(x[0])
+            res.append(x)
+        s1 =(first[0]+', '+first[1]+', '+first[2])
+        await ctx.send(s1)
+        for u in res:
+            s2 = (u[0]+' - '+u[1]+': '+u[2])
+
 
 
 bot.run(TOKEN)

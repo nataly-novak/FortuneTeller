@@ -35,7 +35,7 @@ def threeMajors():
     majors = list(range(0, 22))
     draw = []
     for i in range(3):
-        draw.append(majors.pop(random.randrange(len(majors))))
+        draw.append[(majors.pop(random.randrange(len(majors)))), random.randrange(1)]
     return draw
 
 
@@ -43,8 +43,13 @@ def printCard(j):
     deck = getCards()
     card = []
     for k in range(len(deck)):
-        if deck[k][0] == j:
+        if deck[k][0] == j[0]:
             card.append(deck[k][1])
+            if j[1] == '0':
+                card.append('Normal')
+            else:
+                card.append('Reversed')
+
             card.append(deck[k][2])
     return card
 
