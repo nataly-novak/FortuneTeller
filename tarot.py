@@ -35,7 +35,11 @@ def threeMajors():
     majors = list(range(0, 22))
     draw = []
     for i in range(3):
-        draw.append[(majors.pop(random.randrange(len(majors)))), random.randrange(1)]
+        x =[]
+        #draw.append[(majors.pop(random.randrange(len(majors)))), random.randrange(1)]
+        x.append(majors.pop(random.randrange(len(majors))))
+        x.append(random.randrange(1))
+        draw.append(x)
     return draw
 
 
