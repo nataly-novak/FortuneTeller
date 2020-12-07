@@ -38,7 +38,7 @@ def threeMajors():
         x =[]
         #draw.append[(majors.pop(random.randrange(len(majors)))), random.randrange(1)]
         x.append(majors.pop(random.randrange(len(majors))))
-        x.append(random.randrange(1))
+        x.append(random.randrange(2))
         draw.append(x)
     return draw
 
