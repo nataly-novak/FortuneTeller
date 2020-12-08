@@ -160,7 +160,7 @@ async def tarot(ctx, variant):
 
 @bot.command(name='deck', help='')
 async def thedeck(ctx, stat, num):
-    telling = fortuneTelling(stat, num, deckFormat())
+    telling = fortuneTelling(stat, int(num), deckFormat())
     for s in telling:
         await ctx.send(s)
 
