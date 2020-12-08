@@ -30,14 +30,3 @@ def decode(text, key):
         res += letter
     return res
 
-
-#f = open("/home/study/Harrow", "r")
-#f1 = f.readlines()
-#w = open('thedeck',"w+")
-#for i in f1:
-#    w.write(encode(i,'PHARASMA'))
-#    w.write("\n")
-f = open("thedeck", "r")
-f1 = f.readlines()
-for i in f1:
-    print(decode(i,"PHARASMA"))
