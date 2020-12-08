@@ -161,7 +161,7 @@ async def tarot(ctx, variant):
 @bot.command(name='deck', help='')
 async def thedeck(ctx, stat, num):
     telling = fortuneTelling(stat, num, deckFormat())
-    for s in telling
+    for s in telling:
         await ctx.send(s)
 
 bot.run(TOKEN)
