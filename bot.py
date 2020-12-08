@@ -1,11 +1,12 @@
 import os
 import random
 from tarot import threeMajors, getMajors, getCards, printCard, threeCards
+from pfcards import deckFormat, fortuneTelling
 
 from discord.ext import commands
 from dotenv import load_dotenv
 
-import os
+
 import psycopg2
 
 DATABASE_URL = os.environ['DATABASE_URL']
@@ -141,7 +142,7 @@ async def tarot(ctx, variant):
         s1 = (first[0] + ', ' + first[1] + ', ' + first[2])
         await ctx.send(s1)
         for u in res:
-            s2 = (u[0] + ' - ' + u[1] + ': ' + u[2])
+            s2 = (u[0] + ' - ' + u[1] + ' - ' + u[2])
             await ctx.send(s2)
     elif variant == '3k':
         a = threeCards()
@@ -154,8 +155,13 @@ async def tarot(ctx, variant):
         s1 = (first[0] + ', ' + first[1] + ', ' + first[2])
         await ctx.send(s1)
         for u in res:
-            s2 = (u[0] + ' - ' + u[1] + ': ' + u[2])
+            s2 = (u[0] + ' - ' + u[1] + ' - ' + u[2])
             await ctx.send(s2)
 
+@bot.command(name='deck', help='')
+async def thedeck(ctx, stat, num):
+    telling = fortuneTelling(stat, num, deckFormat())
+    for s in telling
+        await ctx.send(s)
 
 bot.run(TOKEN)
