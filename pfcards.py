@@ -8,7 +8,7 @@ phases = ["Positive past:", "Unclear past:", "Negative past:", "Positive Present
           "Negative Present:", "Positive Future:", "Unclear Future:", "Negative Future:"]
 import os
 
-CODE_KEY = 'PHARASMA'
+CODE_KEY = os.environ['CODE_KEY']
 
 
 def isOpposed(a, b):
