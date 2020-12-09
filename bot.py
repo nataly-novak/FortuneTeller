@@ -145,4 +145,18 @@ async def itl(ctx, line, trans =""):
     for j in rows:
         print(j)
 
+
+@bot.command(name='d' , help='deletes last quote')
+async def de(ctx):
+    cur.execute("SELECT MAX(NUM) FROM inter;")
+    a = str(cur.fetchone())
+    cur.execute("DELETE FROM inter WHERE NUM = %s;",(a))
+    cur.execute("SELECT NUM, QUOT, TRAN from inter")
+    rows = cur.fetchall()
+    for j in rows:
+        print(j)
+
+
+
+
 bot.run(TOKEN)
