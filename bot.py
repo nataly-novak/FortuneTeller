@@ -43,7 +43,7 @@ for i in f1:
     a = i[:-1].split(' - ')
     if len(a)<3:
         a.append('')
-    cur.execute("INSERT INTO inter VALUES (%s %s,%s,%s) ON CONFLICT (QUOT) DO NOTHING ;",(cnt,a[0],a[1],a[2]))
+    cur.execute("INSERT INTO inter VALUES (%s,%s,%s,%s) ON CONFLICT (QUOT) DO NOTHING ;",(cnt,a[0],a[1],a[2]))
     cnt += 1
     print(cnt)
 cur.execute("SELECT NUM, LANG, QUOT, TRAN from inter")
