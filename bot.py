@@ -55,7 +55,7 @@ print(n)
 f.close()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
-bot = commands.Bot(command_prefix='#')
+bot = commands.Bot(command_prefix='!')
 
 
 @bot.command(name='q', help = "generates random quotes with translation")
