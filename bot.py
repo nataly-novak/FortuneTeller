@@ -5,7 +5,7 @@ from pfcards import deckFormat, fortuneTelling
 
 from discord.ext import commands
 from dotenv import load_dotenv
-
+from kicker import kicks
 
 import psycopg2
 
@@ -206,7 +206,7 @@ async def thedeck(ctx, stat, num):
 
 @bot.command(name='kick')
 async def kick(ctx):
-    a = "call " + ctx.message.author.mention
+    a = kicks() + ctx.message.author.mention
     await ctx.send(a)
 
 bot.run(TOKEN)

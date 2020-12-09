@@ -1,7 +1,7 @@
 import random
 
 
-def kick():
+def kicks():
     k = open('Hits','r')
     k1 = k.readlines()[:-1]
     n = len(k1)
