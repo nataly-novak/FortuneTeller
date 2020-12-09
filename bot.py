@@ -80,7 +80,7 @@ async def cookin(ctx):
 
 
 @bot.command(name='add' , help='Adds a quote. Use quotes around both quote and translation')
-async def itl(ctx, line, trans =""):
+async def itl(ctx,language, line, trans =""):
     cur.execute("SELECT MAX(NUM) FROM inter;")
     a = str(cur.fetchone())
     print(a)
@@ -89,7 +89,7 @@ async def itl(ctx, line, trans =""):
     else:
         ar = int(a[1:-2]) + 1
     print(ar)
-    cur.execute("INSERT INTO inter VALUES (%s,%s,%s) ON CONFLICT (QUOT) DO NOTHING ;",(ar,line,trans))
+    cur.execute("INSERT INTO inter VALUES (%s,%s,%s,%s) ON CONFLICT (QUOT) DO NOTHING ;",(ar,language,line,trans))
     conn.commit()
     cur.execute("SELECT NUM, QUOT, TRAN from inter")
     rows = cur.fetchall()
