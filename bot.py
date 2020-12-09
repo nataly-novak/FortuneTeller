@@ -63,7 +63,7 @@ print(n)
 f.close()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
-bot = commands.Bot(command_prefix='/')
+bot = commands.Bot(command_prefix='#')
 
 
 @bot.command(name='c', help = "generates random quotes")
