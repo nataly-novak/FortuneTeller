@@ -12,6 +12,8 @@ import psycopg2
 DATABASE_URL = os.environ['DATABASE_URL']
 
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+
+
 cur = conn.cursor()
 # cur.execute("DROP TABLE inter")
 cur.execute("select exists(select * from information_schema.tables where table_name=%s)", ('quotes',))
@@ -48,7 +50,7 @@ f = open("quotes.txt", "r")
 f1 = f.readlines()
 cnt = 0
 for i in f1:
-    cur.execute("INSERT INTO quotes VALUES (%s,%s) ON CONFLICT (QUOT) DO NOTHING ;", (cnt, i[:-1]))
+    cur.execute("INSERT INTO quotes VALUES (%s,%s) ON CONFLICT (QUOT) DO NOTHING ;",(cnt,i[:-1]))
     cnt += 1
     print(cnt)
 cur.execute("SELECT NUM, QUOT from quotes")
@@ -56,9 +58,31 @@ rows = cur.fetchall()
 for j in rows:
     print(j)
 
+
+
 n = len(f1)
 print(n)
 f.close()
+
+f = open("international", "r")
+f1 = f.readlines()
+cnt = 0
+for i in f1:
+    a = i[:-1].split(' - ')
+    if len(a)<2:
+        a.append('')
+    cur.execute("INSERT INTO inter VALUES (%s,%s,%s) ON CONFLICT (QUOT) DO NOTHING ;",(cnt,a[0],a[1]))
+    cnt += 1
+    print(cnt)
+cur.execute("SELECT NUM, QUOT, TRAN from inter")
+rows = cur.fetchall()
+for j in rows:
+    print(j)
+
+n = len(f1)
+print(n)
+f.close()
+
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 bot = commands.Bot(command_prefix='!')
@@ -83,13 +107,13 @@ async def cookin(ctx):
     r = str(cur.fetchone())
     rr = int(r[1:-2])
     print(rr)
-    dd = random.randrange(rr + 1)
-    cur.execute("SELECT QUOT FROM inter WHERE NUM = %s", ([dd]))
+    dd = random.randrange(rr+1)
+    cur.execute("SELECT QUOT FROM inter WHERE NUM = %s",([dd]))
     resp = str(cur.fetchone())
     response = resp[2:-3].strip()
     cur.execute("SELECT TRAN FROM inter WHERE NUM = %s", ([dd]))
     resp1 = str(cur.fetchone())
-    response = response + ' - ' + resp1[2:-3].strip()
+    response = response+' - ' +resp1[2:-3].strip()
     print(response)
     await ctx.send(response)
 
@@ -110,9 +134,8 @@ async def writ(ctx, line):
     for j in rows:
         print(j)
 
-
-@bot.command(name='a', help='Adds a quote. Use quotes around both quote and translation')
-async def itl(ctx, line, trans=""):
+@bot.command(name='a' , help='Adds a quote. Use quotes around both quote and translation')
+async def itl(ctx, line, trans =""):
     cur.execute("SELECT MAX(NUM) FROM inter;")
     a = str(cur.fetchone())
     print(a)
@@ -121,12 +144,27 @@ async def itl(ctx, line, trans=""):
     else:
         ar = int(a[1:-2]) + 1
     print(ar)
-    cur.execute("INSERT INTO inter VALUES (%s,%s,%s) ON CONFLICT (QUOT) DO NOTHING ;", (ar, line, trans))
+    cur.execute("INSERT INTO inter VALUES (%s,%s,%s) ON CONFLICT (QUOT) DO NOTHING ;",(ar,line,trans))
     conn.commit()
     cur.execute("SELECT NUM, QUOT, TRAN from inter")
     rows = cur.fetchall()
     for j in rows:
         print(j)
+
+
+@bot.command(name='d' , help='deletes last quote')
+async def de(ctx):
+    cur.execute("SELECT MAX(NUM) FROM inter;")
+    a = int(str(cur.fetchone())[1:-2])
+    print(a)
+    cur.execute("DELETE FROM inter WHERE NUM = %s;",([a]))
+    cur.execute("SELECT NUM, QUOT, TRAN from inter")
+    rows = cur.fetchall()
+    for j in rows:
+        print(j)
+
+
+
 
 
 @bot.command(name='tarot', help='')
