@@ -196,10 +196,16 @@ async def tarot(ctx, variant):
             s2 = (u[0] + ' - ' + u[1] + ' - ' + u[2])
             await ctx.send(s2)
 
+
 @bot.command(name='deck', help='')
 async def thedeck(ctx, stat, num):
     telling = fortuneTelling(stat, int(num), deckFormat())
     for s in telling:
         await ctx.send(s)
+
+
+@bot.command(name = 'kick')
+async def kick(ctx):
+    await ctx.send(ctx.message.author.mention)
 
 bot.run(TOKEN)
