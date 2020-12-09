@@ -28,6 +28,8 @@ else:
     print('No need')
 conn.commit()
 
+print('koai')
+
 cur.execute("select exists(select * from information_schema.tables where table_name=%s)", ('inter',))
 check = (cur.fetchone()[0])
 print(check)
