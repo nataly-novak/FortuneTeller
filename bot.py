@@ -150,6 +150,7 @@ async def itl(ctx, line, trans =""):
 async def de(ctx):
     cur.execute("SELECT MAX(NUM) FROM inter;")
     a = int(str(cur.fetchone())[1:-3])
+    print(a)
     cur.execute("DELETE FROM inter WHERE NUM = %s;",([a]))
     cur.execute("SELECT NUM, QUOT, TRAN from inter")
     rows = cur.fetchall()
