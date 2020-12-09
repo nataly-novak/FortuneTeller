@@ -24,6 +24,7 @@ print(check)
 if not check:
     cur.execute('''CREATE TABLE inter (
     NUM INT  NOT NULL,
+    LANG CHAR (30) NOT NULL,
     QUOT CHAR(200)  NOT NULL,
     TRAN CHAR(200)
     );''')
@@ -40,12 +41,12 @@ f1 = f.readlines()
 cnt = 0
 for i in f1:
     a = i[:-1].split(' - ')
-    if len(a)<2:
+    if len(a)<3:
         a.append('')
-    cur.execute("INSERT INTO inter VALUES (%s,%s,%s) ON CONFLICT (QUOT) DO NOTHING ;",(cnt,a[0],a[1]))
+    cur.execute("INSERT INTO inter VALUES (%s %s,%s,%s) ON CONFLICT (QUOT) DO NOTHING ;",(cnt,a[0],a[1],a[2]))
     cnt += 1
     print(cnt)
-cur.execute("SELECT NUM, QUOT, TRAN from inter")
+cur.execute("SELECT NUM, LANG, QUOT, TRAN from inter")
 rows = cur.fetchall()
 for j in rows:
     print(j)
@@ -71,6 +72,9 @@ async def cookin(ctx):
     cur.execute("SELECT TRAN FROM inter WHERE NUM = %s", ([dd]))
     resp1 = str(cur.fetchone())
     response = response+' - ' +resp1[2:-3].strip()
+    cur.execute("SELECT LANG FROM inter WHERE NUM = %s", ([dd]))
+    resp2 = str(cur.fetchone())
+    response = response+' - ' +resp2[2:-3].strip()
     print(response)
     await ctx.send(response)
 
