@@ -55,10 +55,10 @@ print(n)
 f.close()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
-bot = commands.Bot(command_prefix='!')
+bot = commands.Bot(command_prefix='/')
 
 
-@bot.command(name='q', help = "generates random quotes with translation")
+@bot.command(name='quote', help = "generates random quotes with translation")
 async def cookin(ctx):
     cur.execute("SELECT MAX(NUM) FROM inter;")
     r = str(cur.fetchone())
@@ -75,7 +75,7 @@ async def cookin(ctx):
     await ctx.send(response)
 
 
-@bot.command(name='a' , help='Adds a quote. Use quotes around both quote and translation')
+@bot.command(name='add' , help='Adds a quote. Use quotes around both quote and translation')
 async def itl(ctx, line, trans =""):
     cur.execute("SELECT MAX(NUM) FROM inter;")
     a = str(cur.fetchone())
@@ -93,7 +93,7 @@ async def itl(ctx, line, trans =""):
         print(j)
 
 
-@bot.command(name='d' , help='deletes last quote')
+@bot.command(name='del' , help='deletes last quote')
 async def de(ctx):
     cur.execute("SELECT MAX(NUM) FROM inter;")
     a = int(str(cur.fetchone())[1:-2])
