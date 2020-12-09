@@ -8,4 +8,3 @@ def kicks():
     r = random.randrange(n)
     return k1[r]
 
-print(kick())
