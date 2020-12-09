@@ -149,7 +149,7 @@ async def itl(ctx, line, trans =""):
 @bot.command(name='d' , help='deletes last quote')
 async def de(ctx):
     cur.execute("SELECT MAX(NUM) FROM inter;")
-    a = int(str(cur.fetchone())[1:-3])
+    a = int(str(cur.fetchone())[1:-2])
     print(a)
     cur.execute("DELETE FROM inter WHERE NUM = %s;",([a]))
     cur.execute("SELECT NUM, QUOT, TRAN from inter")
