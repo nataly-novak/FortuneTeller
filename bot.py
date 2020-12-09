@@ -61,6 +61,25 @@ for j in rows:
 n = len(f1)
 print(n)
 f.close()
+
+f = open("international", "r")
+f1 = f.readlines()
+cnt = 0
+for i in f1:
+    a = i[:-1].split(' - ')
+    if len(a)<2:
+        a.append('')
+    cur.execute("INSERT INTO inter VALUES (%s,%s,%s) ON CONFLICT (QUOT) DO NOTHING ;",(cnt,a[0],a[1]))
+    cnt += 1
+    print(cnt)
+cur.execute("SELECT NUM, QUOT, TRAN from inter")
+rows = cur.fetchall()
+for j in rows:
+    print(j)
+
+n = len(f1)
+print(n)
+f.close()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 bot = commands.Bot(command_prefix='#')
