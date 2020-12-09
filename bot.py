@@ -207,6 +207,6 @@ async def thedeck(ctx, stat, num):
 @bot.command(name='kick')
 async def kick(ctx):
 
-    await ctx.send('says {}',ctx.message.author.mention)
+    await ctx.send('says %s',ctx.message.author.mention)
 
 bot.run(TOKEN)
