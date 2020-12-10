@@ -32,7 +32,7 @@ def getMajors():
 
 
 def threeMajors():
-    majors = list(range(0, 78))
+    majors = list(range(0, 22))
     draw = []
     for i in range(3):
         x =[]
