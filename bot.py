@@ -2,6 +2,7 @@ import os
 import random
 from tarot import threeMajors, getMajors, getCards, printCard, threeCards
 from pfcards import deckFormat, fortuneTelling
+from rbrb import rbroll
 
 from discord.ext import commands
 from dotenv import load_dotenv
@@ -209,4 +210,8 @@ async def kick(ctx):
     a = kicks() + ctx.message.author.mention
     await ctx.send(a)
 
+@bot.command(name = "rd", help = 'Righteous blood rolls:\nxd>dif - vs difficulty\n xd>yd - opposed\n xd>hardiness%d - damage\n xd>hardiness%o - open damage')
+async def rdr(ctx, line):
+    a = rbroll(line)
+    await ctx.send(a)
 bot.run(TOKEN)
