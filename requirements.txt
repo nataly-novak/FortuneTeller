@@ -4,3 +4,4 @@ async-timeout==3.0.1
 discord.py
 python-dotenv
 psycopg2-binary
+pytz
