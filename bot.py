@@ -7,6 +7,7 @@ from rbrb import rbroll
 from discord.ext import commands
 from dotenv import load_dotenv
 from kicker import kicks
+from timework import timeConversion
 
 import psycopg2
 
@@ -214,4 +215,10 @@ async def kick(ctx):
 async def rdr(ctx, line):
     a = '`'+rbroll(line)+'`'
     await ctx.send(a)
+
+@bot.command(name = "time", help = "Converts time between timezones hh:mm Europe/Moscow Asia/Yekaterinburg")
+async def time(ctx, time, zone1, zone2):
+    message = timeConversion(time,zone1,zone2)
+    await ctx.send(message)
+
 bot.run(TOKEN)
