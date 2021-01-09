@@ -219,6 +219,7 @@ async def rdr(ctx, line):
 @bot.command(name = "time", help = "Converts time between timezones hh:mm Europe/Moscow Asia/Yekaterinburg")
 async def time(ctx, time, zone1, zone2):
     message = timeConversion(time,zone1,zone2)
+    print(message)
     await ctx.send(message)
 
 bot.run(TOKEN)
