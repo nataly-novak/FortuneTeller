@@ -214,7 +214,7 @@ async def kick(ctx):
 
 @bot.command(name = "rd", help = 'Righteous blood rolls: xd>dif - vs difficulty, xd>yd - opposed, xd>hardiness%d - damage, xd>hardiness%o - open damage')
 async def rdr(ctx, line):
-    a = '`'+rbroll(line)+'`'
+    a = '`'+ctx.message.author.nick+": "+rbroll(line)+'`'
     await ctx.send(a)
 
 @bot.command(name = "time", help = "Converts time between timezones hh:mm Europe/Moscow Asia/Yekaterinburg")

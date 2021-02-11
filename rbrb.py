@@ -90,30 +90,35 @@ def open(n, val):
 
 
 def parser(line):
-    if '%' in line:
-        x = line.split("%")
-        y = x[0].split('>')
-        y[0] = y[0][:-1]
-        if x[1] == "d":
-            res =  damage(int(y[0]),int(y[1]))
-            n = 3
+    if ">" in line:
+        if '%' in line:
+            x = line.split("%")
+            y = x[0].split('>')
+            y[0] = y[0][:-1]
+            if x[1] == "d":
+                res =  damage(int(y[0]),int(y[1]))
+                n = 3
+            else:
+                res = open(int(y[0]),int(y[1]))
+                n = 4
         else:
-            res = open(int(y[0]),int(y[1]))
-            n = 4
+            x = line.split('>')
+            print(x)
+            if 'd' in x[1]:
+                a = x[0][:-1]
+                b = x[1][:-1]
+                res =  opp(int(a),int(b))
+                n = 2
+            else:
+                a = x[0][:-1]
+                b = x[1]
+                print(a,b)
+                res = dif(int(a),int(b))
+                n = 1
     else:
-        x = line.split('>')
-        print(x)
-        if 'd' in x[1]:
-            a = x[0][:-1]
-            b = x[1][:-1]
-            res =  opp(int(a),int(b))
-            n = 2
-        else:
-            a = x[0][:-1]
-            b = x[1]
-            print(a,b)
-            res = dif(int(a),int(b))
-            n = 1
+        x = int(line.rstrip("d"))
+        res = roll(x)
+        n = 5
     return [n,res]
 
 def printer(lst):
@@ -173,6 +178,14 @@ def printer(lst):
             answer += "SUCCESS"
         else:
             answer += "TOTAL SUCCESS"
+    elif lst[0] == 5:
+        n = max(lst[1])
+        answer += ("Result: " + str(n) + '\n')
+        for i in lst[1][1]:
+            answer+=(str(i)+" ")
+        answer +="\n"
+
+
     return answer
 
 
