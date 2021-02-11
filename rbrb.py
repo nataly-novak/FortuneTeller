@@ -181,7 +181,7 @@ def printer(lst):
     elif lst[0] == 5:
         n = max(lst[1])
         answer += ("Result: " + str(n) + '\n')
-        for i in lst[1][1]:
+        for i in lst[1]:
             answer+=(str(i)+" ")
         answer +="\n"
 
