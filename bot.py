@@ -8,6 +8,7 @@ from discord.ext import commands
 from dotenv import load_dotenv
 from kicker import kicks
 from timework import timeConversion
+from dice import solve
 
 import psycopg2
 
@@ -222,5 +223,10 @@ async def time(ctx, time, zone1, zone2):
     message = timeConversion(time,zone1,zone2)
     print(message)
     await ctx.send(message)
+
+@bot.command(name = "r", aliases="roll", help = "Rolls dice.\n kh - keeps highest, \n kl - keeps lowest \n !(limit) explodes \n <> higher/lower then limit \n >(limit)w - uses WoD rules")
+async def roll (ctx, line):
+    answer = solve(line)
+    await ctx.send(answer)
 
 bot.run(TOKEN)
