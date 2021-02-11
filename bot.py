@@ -226,7 +226,7 @@ async def time(ctx, time, zone1, zone2):
 
 @bot.command(name = "r", aliases=["roll"], help = "Rolls dice.\n kh - keeps highest, \n kl - keeps lowest \n !(limit) explodes \n <> higher/lower then limit \n >(limit)w - uses WoD rules")
 async def roll (ctx, line):
-    answer = solve(line)
+    answer = "**"+ctx.message.author.nick+":** " + solve(line)
     await ctx.send(answer)
 
 bot.run(TOKEN)
