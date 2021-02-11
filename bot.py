@@ -214,7 +214,7 @@ async def kick(ctx):
 
 @bot.command(name = "rd", help = 'Righteous blood rolls: xd>dif - vs difficulty, xd>yd - opposed, xd>hardiness%d - damage, xd>hardiness%o - open damage')
 async def rdr(ctx, line):
-    a = '`'+ctx.message.author.nick+": "+rbroll(line)+'`'
+    a = '`'+ctx.message.author.nick+":\n "+rbroll(line)+'`'
     await ctx.send(a)
 
 @bot.command(name = "time", help = "Converts time between timezones hh:mm Europe/Moscow Asia/Yekaterinburg")
@@ -226,7 +226,7 @@ async def time(ctx, time, zone1, zone2):
 
 @bot.command(name = "r", aliases=["roll"], help = "Rolls dice.\n kh - keeps highest, \n kl - keeps lowest \n !(limit) explodes \n <> higher/lower then limit \n >(limit)w - uses WoD rules")
 async def roll (ctx, line):
-    answer = "**"+ctx.message.author.nick+":** " + solve(line)
+    answer = "**"+ctx.message.author.nick+":\n** " + solve(line)
     await ctx.send(answer)
 
 bot.run(TOKEN)
