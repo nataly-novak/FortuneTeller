@@ -155,7 +155,7 @@ async def itl(ctx, line, trans =""):
         print(j)
 
 
-@bot.command(name='d' , help='deletes last quote')
+@bot.command(name='d', help='deletes last quote')
 async def de(ctx):
     cur.execute("SELECT MAX(NUM) FROM inter;")
     a = int(str(cur.fetchone())[1:-2])
@@ -226,7 +226,10 @@ async def time(ctx, time, zone1, zone2):
 
 @bot.command(name = "r", aliases=["roll"], help = "Rolls dice.\n kh - keeps highest, \n kl - keeps lowest \n !(limit) explodes \n <> higher/lower then limit \n >(limit)w - uses WoD rules")
 async def roll (ctx, line):
-    answer = "**"+ctx.message.author.nick+":\n**" + solve(line)
+    nick = ctx.message.author.nick
+    if nick == None:
+        nick = ctx.message.author.name
+    answer = "**"+nick+":\n**" + solve(line)
     await ctx.send(answer)
 
 bot.run(TOKEN)
