@@ -4,7 +4,7 @@ from tarot import threeMajors, getMajors, getCards, printCard, threeCards
 from pfcards import deckFormat, fortuneTelling
 from rbrb import rbroll
 
-from discord.ext import commands
+from discord.ext import commands, tasks
 from dotenv import load_dotenv
 from kicker import kicks
 from timework import timeConversion
