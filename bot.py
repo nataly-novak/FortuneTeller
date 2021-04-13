@@ -14,7 +14,7 @@ from dbwork import *
 import psycopg2
 
 makedb()
-
+filldb()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 bot = commands.Bot(command_prefix='/')
