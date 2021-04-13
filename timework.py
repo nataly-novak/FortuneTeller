@@ -43,6 +43,14 @@ def timeConversion(time, zone1, zone2):
         localtime = toLocal(utctime[0],utctime[1], zone2).split(sep=' ')
         return localtime[1]
 
+def getToday(zone):
+    current = currentUTC().split(sep=" ")
+    date = toLocal(current[0],current[1],zone).split(sep=' ',maxsplit=1)[0]
+    return date
+
+def utcToday():
+    return currentUTC().split(sep=" ")[0]
+
 
 
 

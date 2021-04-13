@@ -7,7 +7,7 @@ from rbrb import rbroll
 from discord.ext import commands, tasks
 from dotenv import load_dotenv
 from kicker import kicks
-from timework import timeConversion
+from timework import *
 from dice import solve
 from dbwork import *
 
@@ -292,5 +292,27 @@ async def raid_done():
     bot.on_raid = False
     bot.raidstatus = 0
 
+@bot.command(name="utc",help="yyyy-mm-dd hh:mm timezone:Continent/City - converts to UTC", pass_context=True)
+async def utc(ctx, date="", time="", zone=""):
+    if date=="" and time=="" and zone == "":
+        message = currentUTC()
+    elif time != "" and zone != "":
+        if date == "today":
+            date = getToday(zone)
+        message = toUTC(date, time, zone)
+    else:
+        message = "Please use the format yyyy-mm-dd hh:mm Continent/City"
+    await ctx.send(message)
+
+
+@bot.command(name="local",help="yyyy-mm-dd hh:mm timezone:Continent/City - converts UTC to your Timezone, works in bot channel", pass_context=True)
+async def local(ctx, date, time, zone):
+        if time != "" and zone != "":
+            if date == "today":
+                date = utcToday()
+            message = toLocal(date, time, zone)
+        else:
+            message = "Please use the format yyyy-mm-dd hh:mm Continent/City"
+        await ctx.send(message)
 
 bot.run(TOKEN)
