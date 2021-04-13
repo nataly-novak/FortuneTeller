@@ -123,6 +123,7 @@ async def cookin(ctx):
     conn = psycopg2.connect(DATABASE_URL, sslmode='require')
     cur = conn.cursor()
     cur.execute("SELECT MAX(NUM) FROM inter;")
+    print(r)
     r = str(cur.fetchone())
     rr = int(r[1:-2])
     print(rr)
