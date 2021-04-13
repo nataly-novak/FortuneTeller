@@ -85,6 +85,8 @@ for j in rows:
 n = len(f1)
 print(n)
 f.close()
+cur.close()
+conn.close()
 
 TOKEN = os.getenv('DISCORD_TOKEN')
 
@@ -101,6 +103,8 @@ bot.raid_members = []
 
 @bot.command(name='c', help="generates random quotes")
 async def cook(ctx):
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    cur = conn.cursor()
     cur.execute("SELECT MAX(NUM) FROM quotes;")
     r = str(cur.fetchone())
     rr = int(r[1:-2])
@@ -110,10 +114,14 @@ async def cook(ctx):
     response = resp[2:-3].strip()
     print(response)
     await ctx.send(response)
+    cur.close()
+    conn.close()
 
 
 @bot.command(name='q', help="generates random quotes with translation")
 async def cookin(ctx):
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    cur = conn.cursor()
     cur.execute("SELECT MAX(NUM) FROM inter;")
     r = str(cur.fetchone())
     rr = int(r[1:-2])
@@ -127,10 +135,14 @@ async def cookin(ctx):
     response = response+' - ' +resp1[2:-3].strip()
     print(response)
     await ctx.send(response)
+    cur.close()
+    conn.close()
 
 
 @bot.command(name='w', help='Adds a quote. Use quotes around it to enter')
 async def writ(ctx, line):
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    cur = conn.cursor()
     cur.execute("SELECT MAX(NUM) FROM quotes;")
     a = str(cur.fetchone())
     if a == 'None':
@@ -144,9 +156,13 @@ async def writ(ctx, line):
     rows = cur.fetchall()
     for j in rows:
         print(j)
+    cur.close()
+    conn.close()
 
 @bot.command(name='a' , help='Adds a quote. Use quotes around both quote and translation')
 async def itl(ctx, line, trans =""):
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    cur = conn.cursor()
     cur.execute("SELECT MAX(NUM) FROM inter;")
     a = str(cur.fetchone())
     print(a)
@@ -161,10 +177,14 @@ async def itl(ctx, line, trans =""):
     rows = cur.fetchall()
     for j in rows:
         print(j)
+    cur.close()
+    conn.close()
 
 
 @bot.command(name='d', help='deletes last quote')
 async def de(ctx):
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    cur = conn.cursor()
     cur.execute("SELECT MAX(NUM) FROM inter;")
     a = int(str(cur.fetchone())[1:-2])
     print(a)
@@ -173,6 +193,8 @@ async def de(ctx):
     rows = cur.fetchall()
     for j in rows:
         print(j)
+    cur.close()
+    conn.close()
 
 
 
