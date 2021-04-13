@@ -89,6 +89,10 @@ def filldb():
 def randomru():
     conn = getconn()
     cur = conn.cursor()
+    cur.execute("SELECT NUM, QUOT from quotes")
+    rows = cur.fetchall()
+    for j in rows:
+        print(j)
     cur.execute("SELECT MAX(NUM) FROM quotes;")
     r = str(cur.fetchone())
     rr = int(r[1:-2])
