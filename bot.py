@@ -13,7 +13,7 @@ from dbwork import *
 
 import psycopg2
 
-
+makedb()
 
 TOKEN = os.getenv('DISCORD_TOKEN')
 
