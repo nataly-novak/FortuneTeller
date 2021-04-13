@@ -13,42 +13,7 @@ from dbwork import *
 
 import psycopg2
 
-DATABASE_URL = os.environ['DATABASE_URL']
 
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-
-
-cur = conn.cursor()
-# cur.execute("DROP TABLE inter")
-
-
-
-
-
-n = len(f1)
-print(n)
-f.close()
-
-f = open("international", "r")
-f1 = f.readlines()
-cnt = 0
-for i in f1:
-    a = i[:-1].split(' - ')
-    if len(a)<2:
-        a.append('')
-    cur.execute("INSERT INTO inter VALUES (%s,%s,%s) ON CONFLICT (QUOT) DO NOTHING ;",(cnt,a[0],a[1]))
-    cnt += 1
-    print(cnt)
-cur.execute("SELECT NUM, QUOT, TRAN from inter")
-rows = cur.fetchall()
-for j in rows:
-    print(j)
-
-n = len(f1)
-print(n)
-f.close()
-cur.close()
-conn.close()
 
 TOKEN = os.getenv('DISCORD_TOKEN')
 
