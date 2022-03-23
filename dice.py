@@ -165,7 +165,7 @@ def wod(line):
 
 def process(line):
     if line in ["+", "-"]:
-        return [line,line,""]
+        return [line, line, ""]
     else:
         if "d" not in line:
             return [line, int(line)]
