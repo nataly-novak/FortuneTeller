@@ -107,7 +107,7 @@ async def tarot(ctx, variant):
     elif variant == 'cr':
         a = celtic_cross()
         roles = ["The Querent", "The Block", "The Root", "The Recent Past", "Possibilities", "Where You Are Headed", "How You View Yourself Right Now", "Your Environment","Hopes and Fears", "The Outcome"]
-        for i in len(roles):
+        for i in range(len(roles)):
             s2 = roles[i]+": "+a[i][0]+" - "+a[i][1]+" - "+a[i][2]
             await ctx.send(s2)
 
