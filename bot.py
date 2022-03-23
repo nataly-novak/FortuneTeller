@@ -109,7 +109,7 @@ async def tarot(ctx, variant):
         roles = ["The Querent", "The Block", "The Root", "The Recent Past", "Possibilities", "Where You Are Headed", "How You View Yourself Right Now", "Your Environment","Hopes and Fears", "The Outcome"]
         for i in range(len(roles)):
             b = printCard(a[i])
-            s2 = roles[i]+": "+b[i][0]+" - "+b[i][1]+" - "+b[i][2]
+            s2 = roles[i]+": "+b[0]+" - "+b[1]+" - "+b[2]
             await ctx.send(s2)
 
 @bot.command(name='yijing', help='draw the page from the book of changes')
