@@ -73,7 +73,7 @@ async def de(ctx):
 
 
 
-@bot.command(name='tarot', help='')
+@bot.command(name='tarot', help='3m - drops three major arcana, 3k - drops 3 random cards')
 async def tarot(ctx, variant):
     if variant == '3m':
         a = threeMajors()
@@ -103,7 +103,7 @@ async def tarot(ctx, variant):
             await ctx.send(s2)
 
 
-@bot.command(name='deck', help='')
+@bot.command(name='deck', help='pathfinder fortune telling. Write the stats (S, D, C, I, W, A) and the number of members')
 async def thedeck(ctx, stat, num):
     telling = fortuneTelling(stat, int(num), deckFormat())
     for s in telling:
@@ -136,7 +136,7 @@ async def roll (ctx, line):
     await ctx.send(answer)
 
 
-@bot.command(name='raid',help='prints link to raid room',pass_context=True)
+@bot.command(name='raid',help='starts the productivity raid. Shield to join, sword to start',pass_context=True)
 async def raid(ctx, times = '25'):
     chan = ctx.message.channel.id
     if bot.on_raid == False:
@@ -159,7 +159,7 @@ async def raid(ctx, times = '25'):
         await ctx.message.delete()
 
 
-@bot.command(name='break',help='prints link to raid room',pass_context=True)
+@bot.command(name='break',help='starts the break',pass_context=True)
 async def breaks(ctx, times = '5'):
     chan = ctx.message.channel.id
     if bot.on_raid == False:
@@ -197,7 +197,7 @@ async def on_raw_reaction_add(payload):
         remain = "```RAID IS BEGINNING: "+str(bot.raidlen-bot.minutes+1)+" MINUTES TO GO```"
         await channel.send("```RAID HAS STARTED!```")
         await raider.edit(content=remain)
-    elif payload.message_id == bot.raid_id and bot.raidstatus == 1 and payload.emoji.name == "🛡️" and payload.member.bot == False:
+    elif payload.message_id == bot.raid_id and (bot.raidstatus == 1 or bot.raidstatus == 2) and payload.emoji.name == "🛡️" and payload.member.bot == False:
         bot.raid_members.append(payload.member.id)
     elif payload.message_id == bot.raid_id and bot.raidstatus == 1 and payload.emoji.name == "💤" and payload.member.bot == False:
         print("it's alive")
@@ -207,7 +207,7 @@ async def on_raw_reaction_add(payload):
         raider = await channel.fetch_message(bot.raid_id)
         remain = "```BREAK WAS STARTED: " + str(bot.raidlen - bot.minutes + 1) + " MINUTES REMAINING```"
         await raider.edit(content=remain)
-    elif payload.message_id == bot.raid_id and bot.raidstatus == 1 and payload.emoji.name == "🛏️" and payload.member.bot == False:
+    elif payload.message_id == bot.raid_id and (bot.raidstatus == 1 or bot.raidstatus == 2) and payload.emoji.name == "🛏️" and payload.member.bot == False:
         bot.raid_members.append(payload.member.id)
 
 @bot.event

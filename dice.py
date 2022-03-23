@@ -78,7 +78,103 @@ def explode(lst):
         d = roll(die)
         full.append(d)
         rolls.append(d)
-    new_n = 0
+    new_n = 0def process(line):
+    if line in ["+", "-"]:
+        return [line,line,""]
+    else:
+        if "d" not in line:
+            return [line, int(line)]
+        else:
+            if ">" not in line and "<" not in line:
+                if "k" not in line and "!" not in line:
+                    rolls = mult(line)
+                    text = "("
+                    sum = 0
+                    for i in rolls:
+                        text = text + str(i) +", "
+                        sum+=i
+                    text = text.rstrip(" ,")
+                    text = text +")"
+                    return [text, sum]
+                else:
+                    if "!" in line:
+                        rolls = explosion(line)
+                        text = "("
+                        for i in rolls[0]:
+                            if i != "|":
+                                text = text + str(i) + ", "
+                            else:
+                                text = text.rstrip(" ,")
+                                text = text + ' | '
+                        text = text.rstrip("| ,")
+                        text = text + ")"
+                        sum = 0
+                        for i in rolls[1]:
+                            sum += int(i)
+                        return [text, sum]
+                    elif "k" in line:
+                        if "l" in line:
+                            rolls = keeplower(line)
+                        elif "h" in line:
+                            rolls = keephigher(line)
+                        text = "("
+                        cnt = 0
+                        max = len(rolls[1])
+                        for i in rolls[0]:
+                            if i in rolls[1] and cnt < max:
+                                text = text + str(i) + ", "
+                                cnt+=1
+                            else:
+                                text = text + "~~"+str(i) + "~~, "
+                        text = text.rstrip(" ,")
+                        text = text + ")"
+                        sum = 0
+                        for i in rolls[1]:
+                            sum+=i
+                        return [text, sum]
+            else:
+                if ">" in line:
+                    if "w" in line:
+                        rolls = wod(line)
+                        text = "("
+                        for i in rolls[0]:
+                            if i in rolls[1]:
+                                if i != rolls[3]:
+                                    text = text + str(i)+ ", "
+                                else:
+                                    text = text + "**" + str(i) + "**, "
+                            else:
+                                if i != 1:
+                                    text = text+ "~~" + str(i) + "~~, "
+                                else:
+                                    text = text+ "~~**" + str(i) + "**~~, "
+                        text = text.rstrip(", ")+")"
+                        return (text, rolls[2])
+                    else:
+                        parts = line.split('>')
+                        rolls = more(parts[0],parts[1])
+                        text = "("
+                        for i in rolls[0]:
+                            if i in rolls[1]:
+                                text = text + str(i) + ", "
+                            else:
+                                text = text + "~~" + str(i) + "~~, "
+                        text = text.rstrip(", ") + ")"
+                        num = len(rolls[1])
+                        return [text, num]
+                else:
+                    parts = line.split('<')
+                    rolls = less(parts[0], parts[1])
+                    text = "("
+                    for i in rolls[0]:
+                        if i in rolls[1]:
+                            text = text + str(i) + ", "
+                        else:
+                            text = text + "~~" + str(i) + "~~, "
+                    text = text.rstrip(", ") + ")"
+                    num = len(rolls[1])
+                    return [text, num]
+
     full.append("|")
     for i in rolls:
         if i == die:
@@ -272,7 +368,7 @@ def solve(line):
         if vals[1] == "+":
             switch = 1
             fulltext = fulltext + " + "
-        elif vals == "-":
+        elif vals[1] == "-":
             switch = -1
             fulltext = fulltext + " - "
         else:
