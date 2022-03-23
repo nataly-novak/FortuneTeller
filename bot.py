@@ -1,8 +1,11 @@
 import os
 import random
+
+import yijing
 from tarot import threeMajors, getMajors, getCards, printCard, threeCards
 from pfcards import deckFormat, fortuneTelling
 from rbrb import rbroll
+from yijing import get_result
 
 from discord.ext import commands, tasks
 from dotenv import load_dotenv
@@ -101,6 +104,13 @@ async def tarot(ctx, variant):
         for u in res:
             s2 = (u[0] + ' - ' + u[1] + ' - ' + u[2])
             await ctx.send(s2)
+
+@bot.command(name='yijing', help='draw the page from the book of changes')
+async def drawyijing(ctx):
+    telling = get_result()
+    for l in telling:
+        await ctx.send(l)
+
 
 
 @bot.command(name='deck', help='pathfinder fortune telling. Write the stats (S, D, C, I, W, A) and the number of members')
