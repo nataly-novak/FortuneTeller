@@ -2,7 +2,7 @@ import os
 import random
 
 import yijing
-from tarot import threeMajors, getMajors, getCards, printCard, threeCards
+from tarot import threeMajors, getMajors, getCards, printCard, threeCards, celtic_cross
 from pfcards import deckFormat, fortuneTelling
 from rbrb import rbroll
 from yijing import get_result
@@ -76,7 +76,7 @@ async def de(ctx):
 
 
 
-@bot.command(name='tarot', help='3m - drops three major arcana, 3k - drops 3 random cards')
+@bot.command(name='tarot', help='3m - drops three major arcana, 3k - drops 3 random cards, cr - celtic cross')
 async def tarot(ctx, variant):
     if variant == '3m':
         a = threeMajors()
@@ -103,6 +103,12 @@ async def tarot(ctx, variant):
         await ctx.send(s1)
         for u in res:
             s2 = (u[0] + ' - ' + u[1] + ' - ' + u[2])
+            await ctx.send(s2)
+    elif variant == 'cr':
+        a = celtic_cross()
+        roles = ["The Querent", "The Block", "The Root", "The Recent Past", "Possibilities", "Where You Are Headed", "How You View Yourself Right Now", "Your Environment","Hopes and Fears", "The Outcome"]
+        for i in len(roles):
+            s2 = roles[i]+": "+a[i][0]+" - "+a[i][1]+" - "+a[i][2]
             await ctx.send(s2)
 
 @bot.command(name='yijing', help='draw the page from the book of changes')
