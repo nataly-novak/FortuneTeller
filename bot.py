@@ -108,7 +108,8 @@ async def tarot(ctx, variant):
         a = celtic_cross()
         roles = ["The Querent", "The Block", "The Root", "The Recent Past", "Possibilities", "Where You Are Headed", "How You View Yourself Right Now", "Your Environment","Hopes and Fears", "The Outcome"]
         for i in range(len(roles)):
-            s2 = roles[i]+": "+a[i][0]+" - "+a[i][1]+" - "+a[i][2]
+            b = printCard(a[i])
+            s2 = roles[i]+": "+b[i][0]+" - "+b[i][1]+" - "+b[i][2]
             await ctx.send(s2)
 
 @bot.command(name='yijing', help='draw the page from the book of changes')
