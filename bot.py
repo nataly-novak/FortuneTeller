@@ -2,7 +2,7 @@ import os
 import random
 
 import yijing
-from tarot import threeMajors, getMajors, getCards, printCard, threeCards, celtic_cross
+from tarot import threeMajors, getMajors, getCards, printCard, threeCards, celtic_cross, oneMajor, oneCard
 from pfcards import deckFormat, fortuneTelling
 from rbrb import rbroll
 from yijing import get_result
@@ -78,6 +78,14 @@ async def de(ctx):
 
 @bot.command(name='tarot', help='3m - drops three major arcana, 3k - drops 3 random cards, cr - celtic cross')
 async def tarot(ctx, variant):
+    if variant == '1m':
+        a = oneMajor()
+        s = printCard(a[0])
+        await ctx.send(s)
+    if variant == '1c':
+        a = oneCard()
+        s = printCard(a[0])
+        await ctx.send(s)
     if variant == '3m':
         a = threeMajors()
         res = []

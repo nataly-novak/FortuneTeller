@@ -30,6 +30,27 @@ def getMajors():
             cards.append(card)
     return cards
 
+def oneMajor():
+    majors = list(range(0, 22))
+    draw = []
+    x = []
+    # draw.append[(majors.pop(random.randrange(len(majors)))), random.randrange(1)]
+    x.append(majors.pop(random.randrange(len(majors))))
+    x.append(random.randrange(2))
+    draw.append(x)
+    return draw
+
+def oneCard():
+    full = list(range(0, 78))
+    draw = []
+    x = []
+    # draw.append[(majors.pop(random.randrange(len(majors)))), random.randrange(1)]
+    x.append(full.pop(random.randrange(len(full))))
+    x.append(random.randrange(2))
+    draw.append(x)
+    return draw
+
+
 
 def threeMajors():
     majors = list(range(0, 22))
