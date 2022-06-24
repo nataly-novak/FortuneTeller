@@ -80,12 +80,14 @@ async def de(ctx):
 async def tarot(ctx, variant):
     if variant == '1m':
         a = oneMajor()
-        s = printCard(a[0])
+        u = printCard(a[0])
+        s = (u[0] + ' - ' + u[1] + ' - ' + u[2])
         print(s)
         await ctx.send(s)
     elif variant == '1c':
         a = oneCard()
-        s = printCard(a[0])
+        u = printCard(a[0])
+        s = (u[0] + ' - ' + u[1] + ' - ' + u[2])
         await ctx.send(s)
     elif variant == '3m':
         a = threeMajors()
